@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Ghid practic pentru promovarea add-on-urilor Blender: comunități, YouTube, Instagram, Facebook, ore de postare, rutină, lansare, recenzii și bibliografie.">
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
+<title>Ghidul de Promovare a Add-on-urilor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: navigator lateral fix cu căutare (ca un panou N din Blender), conținut pe o coloană de lectură; fiecare categorie are un „socket” colorat, ca în editorul de noduri. */
+:root{
+  --bg:#f4f4f2; --panel:#ffffff; --sunk:#ebebe7; --ink:#1d1f22; --muted:#5d6168; --line:#dadad4;
+  --accent:#c4620f; --accent-soft:#f6e6d6; --mark:#ffd98a;
+  --s-start:#e07a1f; --s-strat:#7a6ff0; --s-com:#16a889; --s-prod:#c9a400; --s-yt:#e5484d; --s-ig:#d23b8c;
+  --s-fb:#2f74e0; --s-alte:#6b8bab; --s-lans:#e07a1f; --s-rut:#7bb32e; --s-ore:#3a9ad9; --s-mas:#9c5ad6; --s-idei:#16a889; --s-carti:#a77a3c; --s-surse:#8a8f97;
+  --f-display:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1c1d1f; --panel:#26282b; --sunk:#202224; --ink:#e7e6e3; --muted:#a2a5ab; --line:#36393d;
+  --accent:#f0923a; --accent-soft:#3a2a1a; --mark:#6b4a12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1c1d1f; --panel:#26282b; --sunk:#202224; --ink:#e7e6e3; --muted:#a2a5ab; --line:#36393d;
+  --accent:#f0923a; --accent-soft:#3a2a1a; --mark:#6b4a12; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.62;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+a{color:var(--accent);text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 1px}
+
+.layout{max-width:1220px;margin:0 auto;display:grid;grid-template-columns:270px minmax(0,1fr);gap:48px}
+aside.side{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;height:100vh;height:100dvh;overflow:auto;padding-block:28px 24px;display:flex;flex-direction:column;gap:18px}
+.logo{display:grid;gap:2px}
+.logo b{font-family:var(--f-display);font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.logo span{font-size:12.5px;color:var(--muted)}
+.search{position:relative}
+.search input{width:100%;font:inherit;font-size:14.5px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:9px 34px 9px 12px}
+.search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.search kbd{position:absolute;right:9px;top:50%;transform:translateY(-50%);font-family:var(--f-mono);font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 5px}
+.search input:not(:placeholder-shown) + kbd{display:none}
+.search-status{font-size:12.5px;color:var(--muted);min-height:1.3em;margin-top:6px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:1px}
+nav.toc a{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:6px;text-decoration:none;color:var(--muted);font-size:14px;font-weight:500}
+nav.toc a:hover{background:var(--sunk);color:var(--ink)}
+nav.toc a[aria-current="true"]{background:var(--panel);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+nav.toc .cnt{margin-left:auto;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.sock{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none;box-shadow:0 0 0 2px color-mix(in srgb,var(--c) 25%,transparent)}
+.toc-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 6px 10px}
+
+main{min-width:0;padding-block:36px 0;max-width:780px}
+.hero{padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;color:var(--accent);letter-spacing:.04em;margin-bottom:10px}
+.hero h1{font-size:clamp(30px,5vw,46px);font-weight:800;line-height:1.05;letter-spacing:-.03em;max-width:16ch}
+.hero p{color:var(--muted);font-size:17px;max-width:62ch;margin:14px 0 0}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--sunk);color:var(--muted);border:1px solid var(--line)}
+
+section.sec{padding-top:44px;scroll-margin-top:8px}
+.sec > header{display:grid;gap:8px;margin-bottom:18px}
+.sec > header .tag{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.03em}
+.sec h2{font-size:28px;font-weight:700;line-height:1.15}
+.sec .intro{color:var(--muted);margin:0;max-width:65ch}
+.item{padding:18px 0;border-top:1px solid var(--line)}
+.item h3{font-size:18px;font-weight:700;margin-bottom:6px;line-height:1.3}
+.item p{margin:0 0 10px;max-width:68ch}
+.item p:last-child{margin-bottom:0}
+.item ul,.item ol{margin:6px 0 10px;padding-left:20px;max-width:68ch}
+.item li{margin:3px 0}
+.item li::marker{color:var(--muted)}
+.src{font-size:12.5px;color:var(--muted)}
+.src a{color:var(--muted)}
+.key{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:16px 18px}
+.key h3{font-size:16px}
+.callout{border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0 10px;max-width:68ch}
+.callout p{margin:0}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:8px 0 10px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;background:var(--sunk)}
+tr:last-child td{border-bottom:none}
+td.t,.mono{font-family:var(--f-mono);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:6px}
+@media (max-width:640px){.rules{grid-template-columns:1fr}}
+.rule{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:14px 16px}
+.rule b{display:block;font-family:var(--f-display);font-size:16px;margin-bottom:4px}
+.rule p{margin:0;font-size:14.5px;color:var(--muted)}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:8px 0 12px}
+.day{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px;min-width:0;font-size:12.5px;line-height:1.4}
+.day b{display:block;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);margin-bottom:4px}
+.day .slot{display:block;margin-top:4px;padding-left:8px;border-left:3px solid var(--c);overflow-wrap:anywhere}
+.day .slot i{font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--muted);display:block}
+@media (max-width:760px){.week{grid-template-columns:1fr 1fr}}
+.book{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px}
+.book .spine{width:8px;border-radius:3px;background:var(--s-carti);grid-row:span 3}
+.book .who{font-size:13px;color:var(--muted)}
+.item ul.bib{list-style:none;padding-left:0}
+.item ul.bib li{padding-left:1.6em;text-indent:-1.6em;margin:6px 0}
+.empty-search{display:none;padding:28px 0;color:var(--muted)}
+.empty-search.on{display:block}
+.mobile-toc{display:none}
+
+@media (max-width:920px){
+  .layout{grid-template-columns:1fr;gap:0}
+  aside.side{position:sticky;height:auto;overflow:visible;padding-block:12px;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);gap:8px}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+  .logo,.side nav.toc,.toc-label{display:none}
+  .mobile-toc{display:block}
+  .mobile-toc summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--muted)}
+  .mobile-toc nav.toc{display:block;max-height:50vh;overflow:auto;margin-top:6px}
+  .search-status:empty{display:none}
+  main{padding-top:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <aside class="side" aria-label="Navigare">
+    <div class="logo"><b>Promovarea add-on-urilor</b><span>Ghid pentru dezvoltatori Blender</span></div>
+    <div>
+      <div class="search">
+        <input id="q" type="search" placeholder="Caută în ghid…" aria-label="Caută în ghid" autocomplete="off">
+        <kbd>/</kbd>
+      </div>
+      <div class="search-status" id="status" aria-live="polite"></div>
+    </div>
+    <div>
+      <p class="toc-label">Cuprins</p>
+      <nav class="toc" id="toc-desk" aria-label="Cuprins"></nav>
+    </div>
+    <details class="mobile-toc"><summary>Cuprins</summary><nav class="toc" id="toc-mob" aria-label="Cuprins"></nav></details>
+  </aside>
+
+  <main id="content">
+    <div class="hero">
+      <div class="eyebrow">Versiune noiembrie 2026 · surse verificate la zi</div>
+      <h1>Cum îți promovezi pluginurile Blender</h1>
+      <p>Unde să postezi, ce să postezi, la ce oră și cum să obții recenzii mai bune. Ghidul combină datele platformelor, studiile pe milioane de postări și cărțile de marketing care contează pentru un dezvoltator independent.</p>
+      <div class="meta-row"><span class="chip">YouTube</span><span class="chip">Instagram</span><span class="chip">Facebook</span><span class="chip">Comunități Blender</span><span class="chip">Lansare</span><span class="chip">Rutină</span></div>
+    </div>
+    <p class="empty-search" id="no-res">Nimic găsit. Încearcă un cuvânt mai scurt sau fără diacritice, de exemplu „ore”, „recenzii”, „shorts”.</p>
+
+    <!-- START -->
+    <section class="sec" id="pe-scurt" data-c="--s-start" data-name="Pe scurt">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-start)"></span>00 · ESENȚIAL</div><h2>Pe scurt: 10 reguli</h2>
+      <p class="intro">Dacă citești o singură secțiune, citește-o pe aceasta. Restul ghidului explică fiecare regulă în detaliu.</p></header>
+      <div class="item">
+        <div class="rules">
+          <div class="rule"><b>Arată, nu explica</b><p>Un clip de 15–30 de secunde cu problema și rezolvarea ei vinde mai bine decât orice text.</p></div>
+          <div class="rule"><b>Scrie „addon”</b><p>Oamenii caută „addon”, nu „add-on” sau „plugin”. Pune cuvântul în titluri și descrieri.</p></div>
+          <div class="rule"><b>Arată procesul</b><p>Postează progresul cât lucrezi: GIF-uri, versiuni timpurii, chiar și cod. Publicul se formează înainte de lansare.</p></div>
+          <div class="rule"><b>Contribuie înainte să ceri</b><p>Pe forumuri și Reddit ajută la întrebări. Promovarea e acceptată de la cei care participă.</p></div>
+          <div class="rule"><b>Conținut original</b><p>Facebook și Instagram distribuie din 2026 mai mult conținutul original și taie reach-ul repostărilor.</p></div>
+          <div class="rule"><b>Un clip, cinci formate</b><p>Un tutorial YouTube produce un Short, un Reel, un GIF de forum și un carusel.</p></div>
+          <div class="rule"><b>Ușurința primează</b><p>În recenziile din marketplace, ușurința de folosire și timpul economisit contează cel mai mult.</p></div>
+          <div class="rule"><b>Documentația previne refund-urile</b><p>Cererile de rambursare vin mai ales din confuzie, nu din bug-uri.</p></div>
+          <div class="rule"><b>Postează pentru două continente</b><p>Pentru Europa și SUA deodată, cele mai bune ore sunt între 15:00 și 20:00, ora României.</p></div>
+          <div class="rule"><b>Măsoară lunar</b><p>Notează fiecare postare și cifrele ei. Repetă ce merge, oprește ce nu merge.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STRATEGIE -->
+    <section class="sec" id="strategie" data-c="--s-strat" data-name="Strategie">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-strat)"></span>01 · POZIȚIONARE</div><h2>Strategie și poziționare</h2>
+      <p class="intro">Înainte de canale și ore, trebuie să fie clar pentru cine e add-on-ul și de ce l-ar alege cineva în locul alternativei.</p></header>
+      <div class="item">
+        <h3>Definește alternativa reală</h3>
+        <p>April Dunford (<em>Obviously Awesome</em>) pornește poziționarea de la întrebarea: ce ar folosi clientul dacă produsul tău n-ar exista? La un add-on Blender, răspunsul e rar „alt add-on”. Mai des e „fac manual, în 40 de minute” sau „un set de noduri găsit pe forum”.</p>
+        <ul>
+          <li><strong>Alternativa:</strong> ce face utilizatorul azi.</li>
+          <li><strong>Diferența:</strong> ce poate add-on-ul tău și alternativa nu poate.</li>
+          <li><strong>Valoarea:</strong> ce câștigă concret (timp, control, calitate).</li>
+          <li><strong>Pentru cine:</strong> cine simte cel mai tare problema (arhitecți, artiști de mediu, animatori, studiouri).</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Publicul cel mai mic viabil</h3>
+        <p>Seth Godin (<em>This Is Marketing</em>) recomandă să alegi cel mai mic grup căruia îi poți schimba ceva, nu „toți utilizatorii Blender”. Kevin Kelly (<em>1,000 True Fans</em>) arată că un creator independent poate trăi din aproximativ o mie de fani care cumpără tot ce face. Pentru pluginuri asta înseamnă: o nișă clară, de exemplu „vizualizare arhitecturală” sau „hard-surface”, și mai multe add-on-uri pentru aceeași nișă.</p>
+      </div>
+      <div class="item">
+        <h3>Clientul e eroul, nu add-on-ul</h3>
+        <p>Donald Miller (<em>Building a StoryBrand</em>): mesajul are succes când utilizatorul e eroul și produsul e ghidul care îl ajută. „Addon-ul X are 14 operatori” vorbește despre tine. „Scapi de UV-urile manuale la clădiri” vorbește despre el.</p>
+        <div class="callout"><p><strong>Formulă pentru titlu sau descriere:</strong> [rezultat dorit] + [în cât timp] + [fără efortul vechi]. Exemplu: „Fațade parametrice în 2 minute, fără modelare manuală”.</p></div>
+      </div>
+      <div class="item">
+        <h3>Ce face un mesaj ușor de distribuit</h3>
+        <p>Jonah Berger (<em>Contagious</em>) a găsit șase motive pentru care oamenii distribuie conținut: statut social, declanșatori, emoție, vizibilitate publică, valoare practică și povești. Pentru add-on-uri, cea mai puternică e <strong>valoarea practică</strong>: un sfat util e trimis mai departe colegilor. Asta se potrivește cu semnalul pe care Instagram îl cântărește cel mai mult pentru non-urmăritori: trimiterile în mesaje.</p>
+      </div>
+      <div class="item">
+        <h3>Testează canale, apoi concentrează-te</h3>
+        <p>Gabriel Weinberg și Justin Mares (<em>Traction</em>) propun metoda „bullseye”: alegi trei canale promițătoare, le testezi ieftin câteva săptămâni și păstrezi unul sau două care aduc rezultate. Nu încerca să fii activ peste tot din prima lună.</p>
+      </div>
+    </section>
+
+    <!-- COMUNITATI -->
+    <section class="sec" id="comunitati" data-c="--s-com" data-name="Unde să postezi">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-com)"></span>02 · CANALE</div><h2>Locuri ca BlenderArtists</h2>
+      <p class="intro">Magazine, forumuri, site-uri de știri și comunități unde ajung exact oamenii care folosesc Blender. Citește regulile fiecăruia înainte de prima postare.</p></header>
+      <div class="item">
+        <h3>Magazine și platforme de distribuție</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Platformă</th><th>Ce este</th><th>De reținut</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://superhivemarket.com/" target="_blank" rel="noopener">Superhive</a></td><td>Fostul Blender Market. Magazinul dedicat Blender, unde cumpărătorii caută deja add-on-uri.</td><td>Ia un procent din vânzări. Are program de afiliere, inclusiv cu BlenderNation.</td></tr>
+            <tr><td>Gumroad</td><td>Vânzare directă, de pe pagina ta.</td><td>Păstrezi mai mult, dar traficul îl aduci tu. Îți construiește lista de emailuri.</td></tr>
+            <tr><td><a href="https://extensions.blender.org/" target="_blank" rel="noopener">Blender Extensions</a></td><td>Platforma oficială, gratuită, integrată în Blender.</td><td>Doar GPL v3+. Fără funcții blocate prin plată și fără linkuri comerciale în interfață. Descrierea poate avea linkuri spre platforme de susținere. Bună pentru o versiune „lite” gratuită.</td></tr>
+            <tr><td>BlenderKit</td><td>Bibliotecă de resurse cu încărcare de add-on-uri (în beta).</td><td>Verifică direct condițiile, sunt încă în schimbare.</td></tr>
+            <tr><td>BOOTH</td><td>Marketplace japonez.</td><td>Potrivit pentru fluxuri VTuber, VRChat și stil anime.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="item">
+        <h3>Forumuri și site-uri de știri Blender</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Loc</th><th>Ce postezi</th><th>Reguli și sfaturi</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://blenderartists.org/" target="_blank" rel="noopener">BlenderArtists</a></td><td>Un fir pentru fiecare add-on, la secțiunea pentru scripturi lansate. Actualizările merg în același fir.</td><td>Membrii activi pot face o postare comercială pe lună, plus actualizări și suport. Postările zilnice de „release” nu sunt acceptate. Susținătorii comerciali de pe Patreon primesc un mesaj lunar fixat 2 zile.</td></tr>
+            <tr><td><a href="https://www.blendernation.com/" target="_blank" rel="noopener">BlenderNation</a></td><td>Știre trimisă prin formularul „Submit News”: lansare, versiune majoră, tutorial.</td><td>Promovare gratuită pentru add-on-urile gratuite. Are și reclame plătite (AdNet) afișate pe BlenderNation și BlenderArtists.</td></tr>
+            <tr><td>Blender Today</td><td>Știri despre lansări.</td><td>Superhive îl recomandă alături de BlenderArtists și BlenderNation.</td></tr>
+            <tr><td><a href="https://blender-addons.org/" target="_blank" rel="noopener">blender-addons.org</a></td><td>Articol permanent despre add-on, bine indexat în Google.</td><td>Primești drepturi de autor după un mesaj privat către Peetie pe BlenderArtists. Recomandarea vine chiar de la administratorul site-ului.</td></tr>
+            <tr><td>3DxDEV</td><td>Prezentarea add-on-urilor noi.</td><td>Acceptă propuneri de la autori.</td></tr>
+            <tr><td>MODELING HAPPY</td><td>Blog japonez cu add-on-uri noi.</td><td>Scrie des despre lansări înaintea presei în engleză. Util pentru piața japoneză.</td></tr>
+            <tr><td>80 Level, CG Channel</td><td>Presă generală de grafică 3D.</td><td>Trimite un comunicat scurt cu GIF și link doar la lansări sau versiuni mari.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="item">
+        <h3>Reddit</h3>
+        <ul>
+          <li><strong>Unde:</strong> r/blender (mare, vizual), r/blenderhelp (răspunzi la întrebări, menționezi add-on-ul doar când rezolvă exact problema), r/b3d.</li>
+          <li><strong>Regula de bază:</strong> „E în regulă să fii un redditor care are un site. Nu e în regulă să fii un site cu un cont de Reddit.” Ghidul des invocat este 90% participare, 10% promovare. Unele subreddituri cer chiar mai puțin.</li>
+          <li><strong>Transparență:</strong> scrie clar „Eu l-am făcut”. Nu folosi conturi secundare și nu posta același anunț în multe subreddituri.</li>
+          <li><strong>Format:</strong> video sau GIF încărcat direct, titlu cu rezultatul, nu cu numele produsului. Linkul îl pui într-un comentariu, dacă regulile o cer.</li>
+          <li>Citește regulile din bara laterală a fiecărui subreddit înainte să postezi.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Rețele și comunități deschise</h3>
+        <ul>
+          <li><strong>X, Bluesky, Mastodon:</strong> hashtag-urile comunității sunt <span class="mono">#b3d</span> și <span class="mono">#blender</span>. Merg bine jurnalele de dezvoltare cu GIF-uri scurte.</li>
+          <li><strong>Discord:</strong> serverele mari Blender au canale de „showcase” sau „self-promo”. Postează doar acolo.</li>
+          <li><strong>Grupuri Facebook de Blender:</strong> multe au o zi dedicată promovării. Vezi secțiunea Facebook.</li>
+          <li><strong>Blender Stack Exchange:</strong> doar răspunsuri reale, cu menționarea legăturii tale cu add-on-ul.</li>
+          <li><strong>devtalk.blender.org</strong> e forumul dezvoltatorilor Blender și nu e un loc de promovare.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Creatori de studiat</h3>
+        <p>Superhive dă ca exemple de autori care își promovează bine produsele: Jim Morren, machin3io, Skyway Visuals, Pierrick Picaut, Mark Kingsnorth și eisklotz. Urmărește-le formatul postărilor, ritmul și felul în care arată procesul de lucru.</p>
+      </div>
+    </section>
+
+    <!-- PRODUS & RATING -->
+    <section class="sec" id="rating" data-c="--s-prod" data-name="Produs și rating">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-prod)"></span>03 · CONVERSIE</div><h2>Pagina produsului și recenziile</h2>
+      <p class="intro">Promovarea aduce oameni pe pagină. Pagina și experiența primelor zile decid dacă aceștia cumpără și ce notă dau.</p></header>
+      <div class="item">
+        <h3>Ce primește nota mare</h3>
+        <p>În recenziile de pe Blender Market (acum Superhive) cel mai apreciat criteriu e <strong>ușurința de folosire</strong>, urmat de <strong>timpul economisit</strong>. Majoritatea oamenilor nu citesc documentația, deci add-on-ul trebuie să fie intuitiv din prima.</p>
+        <ul>
+          <li>Butoanele și panourile să aibă nume clare, cu tooltip-uri pentru fiecare opțiune.</li>
+          <li>Valorile implicite trebuie să dea un rezultat bun fără ajustări.</li>
+          <li>Un fișier demo <span class="mono">.blend</span> inclus, deschis și gata de testat.</li>
+          <li>Un buton „Ajutor” în panou, care duce direct la documentație.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Pagina produsului, de sus în jos</h3>
+        <ol>
+          <li><strong>Primul ecran:</strong> GIF sau video de sub 30 de secunde cu problema și rezolvarea.</li>
+          <li><strong>O frază de valoare:</strong> cine, ce rezultat, cât timp economisește.</li>
+          <li><strong>Înainte și după:</strong> două imagini alăturate.</li>
+          <li><strong>Funcții:</strong> 5–8 puncte, fiecare formulat ca beneficiu.</li>
+          <li><strong>Compatibilitate:</strong> versiunile Blender testate, sistemele de operare, data ultimei actualizări.</li>
+          <li><strong>Întrebări frecvente:</strong> răspunde înainte să fie puse („funcționează cu Cycles și EEVEE?”, „pot folosi în proiecte comerciale?”).</li>
+          <li><strong>Jurnal de modificări:</strong> arată că add-on-ul e întreținut.</li>
+          <li><strong>Recenzii și lucrări reale</strong> ale utilizatorilor, cu permisiunea lor.</li>
+        </ol>
+      </div>
+      <div class="item">
+        <h3>Preț</h3>
+        <p>Repere din piața de add-on-uri în 2026: unelte mici cu un singur scop, de exemplu Geometry Nodes, în jur de 10–15 USD. Add-on-uri consistente, cu un flux complet, 40–80 USD. Licențele de studio, pentru mai multe locuri, mai sus. Un preț prea mic face o unealtă serioasă să pară jucărie. Plata o singură dată se vinde în general mai bine decât abonamentul. „Plătești o dată, funcționează offline” e un argument de vânzare.</p>
+      </div>
+      <div class="item">
+        <h3>Cum ceri recenzii</h3>
+        <ul>
+          <li><strong>La momentul potrivit:</strong> după ce utilizatorul a reușit ceva, nu imediat după cumpărare. De exemplu, în emailul cu o actualizare sau la 1–2 săptămâni după achiziție.</li>
+          <li><strong>Cerere scurtă și directă:</strong> „Dacă te-a ajutat, o recenzie de două rânduri pe Superhive mă ajută enorm să continui dezvoltarea.”</li>
+          <li><strong>Nu oferi recompense pentru note.</strong> Reducerile în schimbul a 5 stele încalcă regulile platformelor și îți strică încrederea.</li>
+          <li><strong>Răspunde la fiecare recenzie</strong>, inclusiv la cele negative, în 24–48 de ore. Mulțumește, explică soluția, anunță când ai reparat.</li>
+          <li><strong>Transformă criticile în actualizări:</strong> „Versiunea 1.3 rezolvă ce mi-ați scris”. O notă mică urmată de un răspuns bun și o reparație poate deveni o recenzie actualizată.</li>
+        </ul>
+        <p class="src">Dovada socială și reciprocitatea sunt două dintre principiile de persuasiune din <em>Influence</em> de Robert Cialdini. O versiune gratuită utilă creează reciprocitate, iar recenziile reale creează dovadă socială.</p>
+      </div>
+      <div class="item">
+        <h3>Suportul face parte din marketing</h3>
+        <p>Un răspuns rapid la o problemă transformă un client nemulțumit în cineva care te recomandă. Păstrează un singur loc pentru suport (un fir de forum, un server Discord sau un email) și scrie-l pe pagina produsului. Notează întrebările repetate și transformă-le în întrebări frecvente sau în clipuri scurte.</p>
+      </div>
+    </section>
+
+    <!-- YOUTUBE -->
+    <section class="sec" id="youtube" data-c="--s-yt" data-name="YouTube">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-yt)"></span>04 · VIDEO LUNG ȘI SHORTS</div><h2>YouTube</h2>
+      <p class="intro">Locul unde majoritatea artiștilor învață Blender. Un tutorial bun aduce vânzări ani la rând.</p></header>
+      <div class="item">
+        <h3>Ce tipuri de clipuri să faci</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Format</th><th>Durată</th><th>Scop</th></tr></thead>
+          <tbody>
+            <tr><td>Demo problemă → soluție</td><td class="t">15–60 s</td><td>Short și primul ecran al paginii de produs</td></tr>
+            <tr><td>Tutorial „cum faci X în Blender”</td><td class="t">8–15 min</td><td>Căutare. Add-on-ul apare ca soluție rapidă la final sau la mijloc.</td></tr>
+            <tr><td>Proiect complet cu add-on-ul</td><td class="t">15–30 min</td><td>Arată fluxul real și construiește încredere</td></tr>
+            <tr><td>Ce e nou în versiunea X</td><td class="t">3–6 min</td><td>Clienții existenți și cei care încă se gândesc</td></tr>
+            <tr><td>Live de dezvoltare sau întrebări</td><td class="t">45–90 min</td><td>Comunitate și feedback</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="item">
+        <h3>Primele secunde</h3>
+        <p>Arată rezultatul final în primele 5 secunde, apoi spune ce va învăța spectatorul. Scoate introducerile lungi, logo-urile animate și „salut, bine ați venit”. YouTube urmărește dacă spectatorii rămân și dacă sunt mulțumiți de ce au văzut, deci titlul și miniatura trebuie să promită exact ce livrează clipul.</p>
+      </div>
+      <div class="item">
+        <h3>Titlu și miniatură</h3>
+        <ul>
+          <li><strong>Titlu:</strong> cuvântul-cheie căutat la început („Blender addon”, „Blender geometry nodes”), apoi beneficiul. Exemplu: „Blender Addon: Realistic Building Facades in 2 Minutes”.</li>
+          <li><strong>Miniatură:</strong> înainte/după, contrast puternic, maximum 3 cuvinte, lizibilă pe telefon. Branding discret: prea mult scade clicurile.</li>
+          <li><strong>Test & Compare:</strong> YouTube îți permite să testezi până la trei miniaturi. Lasă testul să ruleze până primește eticheta de câștigător, pentru că avantajele timpurii se pot inversa. Fă variante clar diferite, de exemplu „curiozitate” față de „claritate”.</li>
+          <li>Compară rezultatele separat pentru abonați și non-abonați. Creșterea vine mai ales din paginile de start și din recomandări.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Descriere, capitole, ecrane de final</h3>
+        <ul>
+          <li><strong>Primele 2 rânduri</strong> se văd fără „mai mult”: pune acolo linkul spre add-on și o frază de beneficiu.</li>
+          <li><strong>Capitole:</strong> marcaje de timp în descriere, primul la <span class="mono">00:00</span>, minimum trei capitole de cel puțin 10 secunde fiecare.</li>
+          <li><strong>Ecran de final</strong> (ultimele 5–20 de secunde): trimite spre o listă de redare „Toate add-on-urile” sau spre tutorialul următor.</li>
+          <li><strong>Comentariu fixat</strong> cu linkul și o întrebare care invită la discuție.</li>
+          <li>Pune linkuri diferite pentru fiecare canal (de exemplu cu parametri UTM), ca să știi de unde vin vânzările.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Shorts</h3>
+        <ul>
+          <li>Pot avea până la 3 minute, dar pentru demo-uri sunt ideale 15–45 de secunde, cu bucle care se reiau natural.</li>
+          <li>Leagă fiecare Short de clipul lung corespunzător (opțiunea pentru clip asociat), ca spectatorii să ajungă la tutorial.</li>
+          <li>Text pe ecran mare, în zona sigură, fără să acopere interfața Blender importantă.</li>
+          <li>Taie Shorts din tutorialele lungi: momentul „wow” din fiecare clip devine un Short separat.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Ritm</h3>
+        <p>Un ritm realist pentru un dezvoltator care lucrează singur: un clip lung la 1–2 săptămâni și 2–3 Shorts pe săptămână. Consecvența contează mai mult decât volumul. Un clip bun la două săptămâni bate trei clipuri grăbite.</p>
+      </div>
+      <div class="item">
+        <h3>Ce urmărești în YouTube Studio</h3>
+        <ul>
+          <li><strong>CTR-ul afișărilor:</strong> cât de bine funcționează titlul și miniatura.</li>
+          <li><strong>Durata medie de vizionare și reținerea:</strong> unde pleacă oamenii. Taie acele părți din clipurile viitoare.</li>
+          <li><strong>Spectatori care revin:</strong> semn că se formează un public.</li>
+          <li><strong>Surse de trafic:</strong> căutare, recomandări, Shorts, externe.</li>
+          <li><strong>„Când sunt spectatorii tăi pe YouTube”</strong> (fila Public): orele exacte ale publicului tău, mai bune decât orice studiu general.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Colaborări</h3>
+        <p>Caută pe YouTube „best blender addons 2026” și contactează autorii clipurilor de tip top. Trimite o licență gratuită, un GIF și trei propoziții despre ce face add-on-ul, fără să ceri o recenzie pozitivă. Autorii mai mici, cu 5–50 de mii de abonați, răspund mai des și au public foarte implicat.</p>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM -->
+    <section class="sec" id="instagram" data-c="--s-ig" data-name="Instagram">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-ig)"></span>05 · REELS ȘI CARUSELE</div><h2>Instagram</h2>
+      <p class="intro">Funcționează excelent pentru rezultate vizuale: randări, înainte/după, timelapse-uri. Reels-urile aduc oameni noi, caruselele sunt salvate.</p></header>
+      <div class="item key">
+        <h3>Ce spune Instagram despre clasament</h3>
+        <p>Adam Mosseri, șeful Instagram, a numit trei semnale principale: <strong>timpul de vizionare</strong>, <strong>aprecierile</strong> și <strong>trimiterile în mesaje</strong>. Aprecierile contează puțin mai mult pentru urmăritori, iar trimiterile pentru oamenii care încă nu te urmăresc. Concluzia: fă conținut pe care cineva îl trimite unui coleg („uite, asta rezolvă ce ziceai”).</p>
+      </div>
+      <div class="item">
+        <h3>Hashtag-uri: maximum 5</h3>
+        <p>Din decembrie 2025, Instagram permite cel mult 5 hashtag-uri pe postare și pe Reel. Mosseri a spus și că hashtag-urile nu cresc reach-ul. Folosește 3–5 hashtag-uri precise (<span class="mono">#blender3d</span>, <span class="mono">#b3d</span>, <span class="mono">#blenderaddon</span>, plus nișa ta) și scrie în descriere cuvintele pe care oamenii le caută, pentru că Instagram le folosește la căutare.</p>
+      </div>
+      <div class="item">
+        <h3>Originalitate</h3>
+        <p>Instagram vrea să dea mai multă distribuție creatorului original decât celor care repostează. Conturile care mai mult repostează nu mai sunt recomandate oamenilor noi. Reels-urile cu sigla altor aplicații, de exemplu un watermark TikTok, sunt împinse mai jos. Încarcă fișierul video original.</p>
+      </div>
+      <div class="item">
+        <h3>Reels care funcționează pentru add-on-uri</h3>
+        <ul>
+          <li><strong>Primul cadru = rezultatul.</strong> Apoi arată cum ajungi la el.</li>
+          <li><strong>Text pe ecran și subtitrări:</strong> aproximativ jumătate din clipurile video de pe Instagram sunt vizionate fără sunet.</li>
+          <li><strong>Lungime:</strong> 15–45 de secunde pentru demo-uri. Un studiu Buffer a găsit că Reels de 90 de secunde până la 3 minute au ajuns la cu 4–7% mai mulți oameni decât media conturilor. Testează ambele.</li>
+          <li><strong>Trial reels:</strong> sunt arătate întâi celor care nu te urmăresc. Folosește-le ca să testezi un format nou fără riscul de a-ți plictisi urmăritorii.</li>
+          <li><strong>Colaborări:</strong> când un artist folosește add-on-ul tău, fă o postare comună cu funcția Collab în loc să-i repostezi lucrarea.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Carusele, Stories, profil</h3>
+        <ul>
+          <li><strong>Carusele:</strong> „5 lucruri pe care le poți face cu X”, „setările mele pentru Y”. Sunt salvate și revăzute.</li>
+          <li><strong>Stories:</strong> procesul de lucru, sondaje („ce funcție urmează?”), anunțuri de reduceri. Păstrează-le în Highlights: Add-ons, Tutoriale, Recenzii.</li>
+          <li><strong>Profil:</strong> descriere cu nișa în primul rând și linkurile spre add-on-uri (Instagram permite mai multe linkuri în profil).</li>
+          <li>Instagram recomandă să distribui postările în timp, nu mai multe una după alta.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FACEBOOK -->
+    <section class="sec" id="facebook" data-c="--s-fb" data-name="Facebook">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-fb)"></span>06 · PAGINI ȘI GRUPURI</div><h2>Facebook</h2>
+      <p class="intro">Pentru add-on-uri, valoarea Facebook stă mai ales în grupurile de Blender și 3D, nu în pagina proprie.</p></header>
+      <div class="item key">
+        <h3>Conținutul original primește mai multă distribuție</h3>
+        <p>Pe 16 martie 2026, Meta a anunțat că algoritmii Facebook dau mai multă distribuție sursei originale. Repostările și duplicatele pot avea reach mai mic. Clipurile care doar reacționează sau lipesc fragmente fără să adauge nimic sunt retrogradate. Conținutul care include materiale ale altora rămâne în regulă dacă adaugi informație, analiză sau o îmbunătățire reală.</p>
+      </div>
+      <div class="item">
+        <h3>Grupuri</h3>
+        <ul>
+          <li>Citește regulile fixate. Multe grupuri permit promovarea doar într-o anumită zi sau într-un fir săptămânal.</li>
+          <li>Postează valoare, nu doar un link: un clip scurt cu un sfat, cu add-on-ul ca soluție. Linkul îl pui în text sau în primul comentariu, după regulile grupului.</li>
+          <li>Răspunde la comentarii în prima oră. Discuția crește distribuția în grup.</li>
+          <li>Nu posta același text în zece grupuri în aceeași zi. Adaptează mesajul și distribuie-le pe parcursul săptămânii.</li>
+          <li>Facebook nu permite aplicațiilor să posteze automat în grupuri. Postarea se face manual. Studio Postări îți ține evidența.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Pagină și programare</h3>
+        <ul>
+          <li>Încarcă clipurile direct (Reels), nu doar linkuri spre YouTube.</li>
+          <li><strong>Meta Business Suite</strong> e gratuit. Programează aceeași postare pe Facebook și Instagram și îți arată când e activ publicul tău.</li>
+          <li>Facebook testează un sondaj după Reels în care spectatorii notează cât de bine se potrivește clipul cu interesele lor. Un public de nișă bine țintit contează mai mult decât unul mare și dezinteresat.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ORE -->
+    <section class="sec" id="ore" data-c="--s-ore" data-name="Ore și zile">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-ore)"></span>07 · CALENDAR</div><h2>La ce ore și în ce zile</h2>
+      <p class="intro">Studiile dau orele în fusul orar local al publicului. Publicul tău e global, cu Europa și SUA ca piețe principale, așa că le-am tradus în ora României.</p></header>
+      <div class="item">
+        <h3>Ce arată studiile</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Rețea</th><th>Cele mai bune momente (ora locală a publicului)</th><th>Sursa</th></tr></thead>
+          <tbody>
+            <tr><td>Instagram</td><td>Lu 14–16 · Ma 13–19 · Mi 12–21 · Jo 12–14</td><td>Sprout Social, 2 mld interacțiuni, nov 2025–feb 2026</td></tr>
+            <tr><td>Facebook</td><td>Lu 12–13 · Ma și Mi 12–20 · Jo 12–14 și 20</td><td>Sprout Social</td></tr>
+            <tr><td>X</td><td>Lu 14–15 și 17 · Ma–Jo 12–18</td><td>Sprout Social</td></tr>
+            <tr><td>YouTube, clip lung</td><td>Du 10 · Du 9 · Vi 12. Zile: Du, Ma, Lu</td><td>Buffer, ~1,8 mil. clipuri, iulie 2026</td></tr>
+            <tr><td>YouTube Shorts</td><td>Vi 16, 18, 19. Zile: Vi, Sâ, Jo</td><td>Buffer</td></tr>
+          </tbody>
+        </table></div>
+        <p class="src">Weekendul e cel mai slab pentru Facebook, Instagram și X. YouTube e excepția, cu duminica printre cele mai bune zile.</p>
+      </div>
+      <div class="item">
+        <h3>Traducerea în ora României</h3>
+        <div class="callout"><p><strong>Ora cheie: 19:00, ora României</strong> = 18:00 la Berlin = 12:00 la New York = 09:00 la Los Angeles. Prinde Europa după-amiaza târziu și SUA la prânz.</p></div>
+        <div class="tbl"><table>
+          <thead><tr><th>Ce postezi</th><th>Când (ora României)</th><th>De ce</th></tr></thead>
+          <tbody>
+            <tr><td>Reel Instagram</td><td class="t">Ma, Mi · 17:00–20:00</td><td>Europa 16–19, SUA est 10–13</td></tr>
+            <tr><td>Postare Facebook / grup</td><td class="t">Ma, Mi · 18:00–20:00</td><td>Suprapunere Europa–SUA</td></tr>
+            <tr><td>Clip lung YouTube</td><td class="t">Du · 16:00–17:00</td><td>SUA est 9–10 dimineața, Europa după-amiaza</td></tr>
+            <tr><td>Short YouTube</td><td class="t">Vi · 17:00–20:00</td><td>Europa 16–19. Testează și Vi 23:00 pentru SUA.</td></tr>
+            <tr><td>X / Bluesky</td><td class="t">Ma–Jo · 15:00–19:00</td><td>Europa după-amiaza, SUA dimineața</td></tr>
+            <tr><td>Reddit, BlenderArtists</td><td class="t">Ma–Jo · 14:00–17:00</td><td>Recomandare practică: dimineața în SUA, ca postarea să crească toată ziua acolo</td></tr>
+          </tbody>
+        </table></div>
+        <p class="src">Diferența față de New York e de 7 ore aproape tot anul. În câteva săptămâni din martie și din octombrie–noiembrie, când țările schimbă ora la date diferite, diferența e de 6 ore.</p>
+      </div>
+      <div class="item">
+        <h3>Datele tale bat orice studiu</h3>
+        <p>Toate aceste ore sunt un punct de plecare. După o lună de postări, uită-te în YouTube Studio la „Când sunt spectatorii tăi pe YouTube” și în Instagram sau Meta Business Suite la orele cele mai active ale urmăritorilor. Testează un interval nou o lună întreagă, nu o singură postare.</p>
+      </div>
+    </section>
+
+    <!-- RUTINA -->
+    <section class="sec" id="rutina" data-c="--s-rut" data-name="Rutina">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-rut)"></span>08 · SISTEM</div><h2>Rutina săptămânală</h2>
+      <p class="intro">Un sistem care încape în 3–4 ore pe săptămână, lângă dezvoltare. Austin Kleon (<em>Show Your Work!</em>) recomandă să împărtășești ceva în fiecare zi din procesul tău. Nathan Barry (<em>Authority</em>) recomandă același lucru pentru scris.</p></header>
+      <div class="item">
+        <h3>Săptămâna tip (ora României)</h3>
+        <div class="week">
+          <div class="day"><b>LUNI</b><span class="slot" style="--c:var(--s-strat)"><i>30 min</i>Planifică săptămâna în Studio Postări</span><span class="slot" style="--c:var(--s-alte)"><i>15:00</i>Jurnal de dezvoltare pe X / Bluesky</span></div>
+          <div class="day"><b>MARȚI</b><span class="slot" style="--c:var(--s-ig)"><i>19:00</i>Reel Instagram + Facebook</span><span class="slot" style="--c:var(--s-com)"><i>15:00</i>Răspunsuri pe forum / Reddit</span></div>
+          <div class="day"><b>MIERCURI</b><span class="slot" style="--c:var(--s-fb)"><i>19:00</i>Postare în 1–2 grupuri FB</span><span class="slot" style="--c:var(--s-yt)"><i>seara</i>Filmare clip lung</span></div>
+          <div class="day"><b>JOI</b><span class="slot" style="--c:var(--s-ig)"><i>18:00</i>Carusel sau Story cu sondaj</span><span class="slot" style="--c:var(--s-com)"><i>15:00</i>Răspunsuri, suport</span></div>
+          <div class="day"><b>VINERI</b><span class="slot" style="--c:var(--s-yt)"><i>18:00</i>Short YouTube</span><span class="slot" style="--c:var(--s-yt)"><i>seara</i>Montaj clip lung</span></div>
+          <div class="day"><b>SÂMBĂTĂ</b><span class="slot" style="--c:var(--s-rut)"><i>liber</i>Pauză sau lucru pe add-on</span></div>
+          <div class="day"><b>DUMINICĂ</b><span class="slot" style="--c:var(--s-yt)"><i>16:00</i>Clip lung YouTube (la 1–2 săpt.)</span></div>
+        </div>
+      </div>
+      <div class="item">
+        <h3>Zilnic, 20–30 de minute</h3>
+        <ul>
+          <li>10 minute: răspunzi la comentarii și mesaje pe toate canalele.</li>
+          <li>10 minute: ajuți pe cineva într-o comunitate, fără link, sau comentezi la lucrările altor artiști.</li>
+          <li>5 minute: faci o captură sau un GIF scurt din ce ai lucrat azi. E materialul pentru postările viitoare.</li>
+          <li>Notezi în Studio Postări ce ai publicat.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Lunar, o oră</h3>
+        <ul>
+          <li>Treci cifrele clipurilor YouTube în Studio Postări (vizualizări, CTR, durată medie).</li>
+          <li>Alegi cele mai bune 3 postări ale lunii și faci variante noi după ele.</li>
+          <li>Verifici vânzările pe canal (linkuri UTM, statistici Superhive sau Gumroad).</li>
+          <li>Renunți la un format care nu a mers de trei ori la rând.</li>
+          <li>Trimiți un email abonaților cu noutăți, un sfat și un link.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Pachetul de conținut dintr-o singură filmare</h3>
+        <p>Filmezi o dată un tutorial de 10 minute. Din el rezultă: clipul lung pe YouTube, 2–3 Shorts, 1–2 Reels (același fișier vertical), un GIF pentru BlenderArtists și X, un carusel cu pașii principali, o postare de grup Facebook cu cel mai bun moment și un paragraf pentru emailul lunar.</p>
+      </div>
+    </section>
+
+    <!-- LANSARE -->
+    <section class="sec" id="lansare" data-c="--s-lans" data-name="Lansarea">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-lans)"></span>09 · PLAN</div><h2>Lansarea unui add-on nou</h2>
+      <p class="intro">Inspirat din secvența pre-lansare, lansare, post-lansare din <em>Launch</em> (Jeff Walker), adaptată pentru un dezvoltator independent.</p></header>
+      <div class="item">
+        <div class="tbl"><table>
+          <thead><tr><th>Când</th><th>Ce faci</th></tr></thead>
+          <tbody>
+            <tr><td class="t">−4 săpt.</td><td>Postezi progresul: GIF-uri, „ce problemă rezolv”. Strângi emailuri pentru o listă de așteptare. Alegi 5–10 artiști pentru testare beta.</td></tr>
+            <tr><td class="t">−2 săpt.</td><td>Pagina produsului, documentația, fișierul demo. Filmezi clipul principal și tai din el Shorts și Reels. Pregătești un pachet de presă: 3 GIF-uri, 5 imagini, o descriere scurtă. Contactezi autori YouTube și site-uri de știri.</td></tr>
+            <tr><td class="t">−3 zile</td><td>Teaser pe toate canalele cu data lansării. Email către lista de așteptare.</td></tr>
+            <tr><td class="t">Ziua 0</td><td>De preferat marți sau miercuri. Publici pe Superhive sau Gumroad, clipul YouTube, Reel-ul, firul de pe BlenderArtists, postarea pe Reddit (dacă regulile permit) și trimiterea către BlenderNation. Reducere de lansare valabilă o săptămână. Răspunzi la tot în primele ore.</td></tr>
+            <tr><td class="t">+1 săpt.</td><td>Distribui lucrările primilor utilizatori (cu permisiune, ca postări Collab). Clip cu răspunsuri la întrebări frecvente. Anunți sfârșitul reducerii.</td></tr>
+            <tr><td class="t">+1 lună</td><td>Prima actualizare cu ce ai primit ca feedback, cu clip „ce e nou”. Ceri recenzii celor care au cumpărat.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="item">
+        <h3>Momente din calendar</h3>
+        <ul>
+          <li><strong>Black Friday și Cyber Monday</strong> (27 și 30 noiembrie 2026): marketplace-urile au de obicei campanii. Verifică acum dacă te poți înscrie și pregătește clipurile.</li>
+          <li><strong>Lansările de versiuni Blender:</strong> anunță compatibilitatea în aceeași săptămână. E un motiv natural de postare și liniștește clienții.</li>
+          <li><strong>Aniversarea add-on-ului</strong> sau a unei versiuni majore: retrospectivă și ofertă.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- MASURARE -->
+    <section class="sec" id="masurare" data-c="--s-mas" data-name="Măsurare">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-mas)"></span>10 · CIFRE</div><h2>Ce măsori</h2>
+      <p class="intro">Puține cifre, urmărite constant. Le notezi lunar în fila YouTube din Studio Postări sau într-un tabel.</p></header>
+      <div class="item">
+        <div class="tbl"><table>
+          <thead><tr><th>Canal</th><th>Cifra principală</th><th>Ce îți spune</th></tr></thead>
+          <tbody>
+            <tr><td>YouTube</td><td>CTR, durata medie de vizionare, spectatori care revin</td><td>Dacă ambalajul atrage și dacă conținutul ține</td></tr>
+            <tr><td>Instagram</td><td>Reach la non-urmăritori, trimiteri, salvări</td><td>Dacă ajungi la oameni noi și dacă e util</td></tr>
+            <tr><td>Facebook</td><td>Reach și comentarii pe postare de grup</td><td>Care grupuri merită timpul tău</td></tr>
+            <tr><td>Magazin</td><td>Vizite → vânzări, rata de refund, nota medie</td><td>Dacă pagina convinge și dacă produsul livrează</td></tr>
+            <tr><td>Email</td><td>Abonați noi, clicuri pe email</td><td>Publicul care îți aparține, independent de algoritmi</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="item">
+        <h3>Linkuri pe canal</h3>
+        <p>Folosește linkuri diferite pentru fiecare canal, de exemplu cu parametri <span class="mono">?utm_source=youtube</span> sau <span class="mono">?utm_source=instagram</span>, ori coduri de reducere diferite pe canale. Altfel nu poți ști ce canal vinde.</p>
+      </div>
+    </section>
+
+    <!-- IDEI -->
+    <section class="sec" id="idei" data-c="--s-idei" data-name="Idei în plus">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-idei)"></span>11 · IDEI</div><h2>Idei în plus pentru sistemul tău</h2>
+      <p class="intro">Lucruri care merg bine pentru dezvoltatorii de add-on-uri și care nu țin de o rețea anume.</p></header>
+      <div class="item"><h3>Versiune gratuită pe Blender Extensions</h3><p>O versiune lite cu adevărat utilă, GPL, fără funcții blocate, publicată pe platforma oficială. Descrierea poate trimite spre o platformă de susținere, iar comunitatea te descoperă direct din Blender. Versiunea completă o vinzi separat, pe Superhive sau Gumroad.</p></div>
+      <div class="item"><h3>Lista ta de email</h3><p>Singurul public pe care nu ți-l poate lua un algoritm. Ofertă de intrare: un fișier <span class="mono">.blend</span> gratuit, un preset sau un mini-add-on. Un email pe lună e suficient.</p></div>
+      <div class="item"><h3>Documentație ca motor de căutare</h3><p>Fiecare pagină de documentație poate răspunde la o căutare reală: „how to scatter rocks in Blender”. Pagina explică problema și arată add-on-ul ca soluție. Aduce trafic constant din Google.</p></div>
+      <div class="item"><h3>Concurs de randări</h3><p>„Fă o scenă cu add-on-ul X”: premiile sunt licențe, iar lucrările participanților devin conținut original (postări Collab, compilații pe YouTube).</p></div>
+      <div class="item"><h3>Pachete și licențe de studio</h3><p>Când ai 2–3 add-on-uri pentru aceeași nișă, fă un pachet cu reducere. Licențele de studio, pentru mai multe locuri, se vând la companii care altfel n-ar cumpăra individual.</p></div>
+      <div class="item"><h3>Afiliați</h3><p>Superhive are program de afiliere, inclusiv cu BlenderNation. Autorii de tutoriale care primesc comision au motiv să-ți recomande add-on-ul pe termen lung.</p></div>
+      <div class="item"><h3>Piața japoneză</h3><p>BOOTH și blogul MODELING HAPPY acoperă o comunitate Blender mare, pe care foarte puțini dezvoltatori occidentali o țintesc. O descriere tradusă poate deschide o piață întreagă.</p></div>
+      <div class="item"><h3>Studio Postări</h3><p>Aplicația ta ține evidența postărilor pe Facebook și Instagram, a grupurilor și comunităților, și acum și a clipurilor YouTube cu cifrele lor. Folosește-o la planificarea de luni și la bilanțul lunar.</p></div>
+    </section>
+
+    <!-- CARTI -->
+    <section class="sec" id="carti" data-c="--s-carti" data-name="Biblioteca">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-carti)"></span>12 · LECTURI</div><h2>Biblioteca</h2>
+      <p class="intro">Cărțile din care vin principiile ghidului, cu ce iei din fiecare pentru add-on-uri.</p></header>
+      <div class="item book"><span class="spine"></span><h3>Show Your Work!</h3><div class="who">Austin Kleon · 2014</div><p>Arată procesul, nu doar produsul. Împărtășește ceva mic în fiecare zi și învață-i pe alții ce știi. Baza jurnalelor de dezvoltare.</p></div>
+      <div class="item book"><span class="spine"></span><h3>This Is Marketing</h3><div class="who">Seth Godin · 2018</div><p>Alege cel mai mic public viabil și servește-l mai bine decât oricine. Marketingul înseamnă să ajuți pe cineva să devină cine vrea să fie.</p></div>
+      <div class="item book"><span class="spine"></span><h3>1,000 True Fans</h3><div class="who">Kevin Kelly · eseu, 2008</div><p>Un creator independent are nevoie de aproximativ o mie de fani adevărați, nu de milioane de urmăritori. Justifică nișa și lista de email.</p></div>
+      <div class="item book"><span class="spine"></span><h3>Obviously Awesome</h3><div class="who">April Dunford · 2019</div><p>Poziționare în pași: alternativa reală, ce ai în plus, valoarea, clienții potriviți, categoria. Folosește-o pentru pagina de produs.</p></div>
+      <div class="item book"><span class="spine"></span><h3>Building a StoryBrand</h3><div class="who">Donald Miller · 2017</div><p>Clientul e eroul, produsul e ghidul. Mesaje clare, centrate pe problema clientului.</p></div>
+      <div class="item book"><span class="spine"></span><h3>Contagious</h3><div class="who">Jonah Berger · 2013</div><p>Cele șase motive pentru care oamenii distribuie conținut. Pentru add-on-uri, valoarea practică e cea mai puternică.</p></div>
+      <div class="item book"><span class="spine"></span><h3>Made to Stick</h3><div class="who">Chip și Dan Heath · 2007</div><p>Idei simple, neașteptate, concrete, credibile, emoționale, spuse ca povești. Ajută la titluri și primele secunde ale clipurilor.</p></div>
+      <div class="item book"><span class="spine"></span><h3>Influence</h3><div class="who">Robert Cialdini · 1984, ediție extinsă 2021</div><p>Reciprocitate (versiunea gratuită), dovadă socială (recenzii, lucrări ale utilizatorilor), raritate (oferte limitate în timp, dacă sunt reale).</p></div>
+      <div class="item book"><span class="spine"></span><h3>Traction</h3><div class="who">Gabriel Weinberg și Justin Mares · 2014, ediția Portfolio 2015</div><p>Metoda „bullseye”: testezi trei canale, păstrezi ce funcționează.</p></div>
+      <div class="item book"><span class="spine"></span><h3>Launch</h3><div class="who">Jeff Walker · 2014</div><p>Secvența pre-lansare, lansare, post-lansare. Baza planului de lansare din acest ghid.</p></div>
+      <div class="item book"><span class="spine"></span><h3>YouTube Secrets</h3><div class="who">Sean Cannell și Benji Travis · 2018</div><p>Strategia unui canal de nișă: căutare, consecvență, liste de redare, comunitate.</p></div>
+      <div class="item book"><span class="spine"></span><h3>Authority</h3><div class="who">Nathan Barry · 2013</div><p>Predă ce știi și scrie zilnic. Un tutorial gratuit bun e cea mai credibilă reclamă pentru o unealtă plătită.</p></div>
+    </section>
+
+    <!-- SURSE -->
+    <section class="sec" id="bibliografie" data-c="--s-surse" data-name="Bibliografie">
+      <header><div class="tag"><span class="sock" style="--c:var(--s-surse)"></span>13 · REFERINȚE</div><h2>Bibliografie</h2>
+      <p class="intro">Cărțile și sursele online din care s-a inspirat ghidul. Sursele online au fost consultate pe 13 noiembrie 2026. Regulile platformelor se schimbă, așa că verifică pagina oficială înainte de decizii importante.</p></header>
+      <div class="item">
+        <h3>Cărți și eseuri</h3>
+        <p class="src" style="margin-bottom:6px">Principiile sunt rezumate și aplicate la add-on-uri de autorul ghidului, fără citate din text.</p>
+        <ul class="bib">
+          <li>Barry, N. (2013). <em>Authority</em>. Autopublicare, nathanbarry.com.</li>
+          <li>Berger, J. (2013). <em>Contagious: Why Things Catch On</em>. New York: Simon &amp; Schuster.</li>
+          <li>Cannell, S., Travis, B. (2018). <em>YouTube Secrets: The Ultimate Guide to Growing Your Following and Making Money as a Video Influencer</em>. Lioncrest Publishing.</li>
+          <li>Cialdini, R. B. (2021). <em>Influence, New and Expanded: The Psychology of Persuasion</em>. New York: Harper Business. Prima ediție: 1984.</li>
+          <li>Dunford, A. (2019). <em>Obviously Awesome: How to Nail Product Positioning So Customers Get It, Buy It, Love It</em>. Ambient Press.</li>
+          <li>Godin, S. (2018). <em>This Is Marketing: You Can’t Be Seen Until You Learn to See</em>. New York: Portfolio/Penguin.</li>
+          <li>Heath, C., Heath, D. (2007). <em>Made to Stick: Why Some Ideas Survive and Others Die</em>. New York: Random House.</li>
+          <li>Kelly, K. (2008). „1,000 True Fans”. <em>The Technium</em>, kk.org.</li>
+          <li>Kleon, A. (2014). <em>Show Your Work! 10 Ways to Share Your Creativity and Get Discovered</em>. New York: Workman Publishing.</li>
+          <li>Miller, D. (2017). <em>Building a StoryBrand: Clarify Your Message So Customers Will Listen</em>. Nashville: HarperCollins Leadership.</li>
+          <li>Walker, J. (2014). <em>Launch: An Internet Millionaire’s Secret Formula to Sell Almost Anything Online</em>. Morgan James Publishing.</li>
+          <li>Weinberg, G., Mares, J. (2015). <em>Traction: How Any Startup Can Achieve Explosive Customer Growth</em>. New York: Portfolio/Penguin. Prima ediție: 2014.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Surse online</h3>
+        <ul class="bib">
+          <li><a href="https://www.blendernation.com/2021/06/21/how-to-promote-your-blender-addon-free-for-free-addons/" target="_blank" rel="noopener">BlenderNation: How to promote your Blender addon</a></li>
+          <li><a href="https://superhivemarket.com/posts/tips-for-promoting-your-products" target="_blank" rel="noopener">Superhive: Tips for promoting your products</a></li>
+          <li><a href="https://3dxdev.com/how-to-sell-blender-add-ons-and-3d-assets-in-2026/" target="_blank" rel="noopener">3DxDEV: How to sell Blender add-ons in 2026</a></li>
+          <li><a href="https://blenderartists.org/t/our-new-policy-on-commercial-posts/1131607" target="_blank" rel="noopener">BlenderArtists: politica pentru postări comerciale</a></li>
+          <li><a href="https://blenderartists.org/t/new-policy-on-self-promotion/1416473/49" target="_blank" rel="noopener">BlenderArtists: politica de autopromovare</a></li>
+          <li><a href="https://extensions.blender.org/terms-of-service" target="_blank" rel="noopener">Blender Extensions: termeni și condiții</a></li>
+          <li><a href="https://www.blendernation.com/advertising/" target="_blank" rel="noopener">BlenderNation AdNet</a></li>
+          <li><a href="https://sproutsocial.com/insights/best-times-to-post-on-social-media/" target="_blank" rel="noopener">Sprout Social: Best times to post on social media (2026)</a></li>
+          <li><a href="https://buffer.com/resources/best-time-to-post-on-youtube/" target="_blank" rel="noopener">Buffer: Best time to post on YouTube (1,8 mil. clipuri)</a></li>
+          <li><a href="https://buffer.com/resources/instagram-algorithms/" target="_blank" rel="noopener">Buffer: How the Instagram algorithm works (2026)</a></li>
+          <li><a href="https://www.socialmediatoday.com/news/instagrams-implementing-new-limits-on-hashtag-use/808309/" target="_blank" rel="noopener">Social Media Today: limita de hashtag-uri pe Instagram</a></li>
+          <li><a href="https://www.exchange4media.com/digital-news/meta-updates-policies-to-reward-original-creators-and-limit-reposted-content-152931.html" target="_blank" rel="noopener">Meta: recompensarea conținutului original (martie 2026)</a></li>
+          <li><a href="https://www.socialmediaexaminer.com/facebooks-2026-rules-for-reach-relevance/" target="_blank" rel="noopener">Social Media Examiner: Facebook 2026 rules for reach</a></li>
+          <li><a href="https://influencermarketinghub.com/youtube-test-compare/" target="_blank" rel="noopener">YouTube Test & Compare pentru miniaturi</a></li>
+          <li><a href="https://support.google.com/youtube/answer/6388789" target="_blank" rel="noopener">YouTube Help: ecrane de final</a></li>
+          <li><a href="https://sproutsocial.com/insights/best-times-to-post-on-youtube/" target="_blank" rel="noopener">Sprout Social: Best times to post on YouTube</a></li>
+          <li><a href="https://superhivemarket.com/posts/sell-more-blender-products-with-blender-nation-as-your-affiliate?page=2" target="_blank" rel="noopener">Superhive: programul de afiliere cu BlenderNation</a></li>
+          <li><a href="https://redship.io/blog/reddit-self-promotion-rules" target="_blank" rel="noopener">Ghid despre regulile de autopromovare pe Reddit (2026)</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(() => {
+const secs = [...document.querySelectorAll("section.sec")];
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const tocs = [document.getElementById("toc-desk"), document.getElementById("toc-mob")];
+for (const t of tocs){
+  const ol = document.createElement("ol");
+  for (const s of secs){
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = "#" + s.id; a.dataset.id = s.id;
+    const dot = document.createElement("span"); dot.className = "sock"; dot.style.setProperty("--c", `var(${s.dataset.c})`);
+    const tx = document.createElement("span"); tx.textContent = s.dataset.name;
+    const cn = document.createElement("span"); cn.className = "cnt";
+    a.append(dot, tx, cn); li.append(a); ol.append(li);
+    if (t.id === "toc-mob") a.addEventListener("click", () => t.closest("details").open = false);
+  }
+  t.append(ol);
+}
+const items = [...document.querySelectorAll(".item")];
+for (const it of items) it.dataset.orig = it.innerHTML;
+const q = document.getElementById("q"), status = document.getElementById("status"), nores = document.getElementById("no-res");
+
+function highlight(el, terms){
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+  for (const n of nodes){
+    const txt = n.nodeValue, nt = norm(txt);
+    const ranges = [];
+    for (const t of terms){ let i = 0; while ((i = nt.indexOf(t, i)) !== -1){ ranges.push([i, i + t.length]); i += t.length; } }
+    if (!ranges.length) continue;
+    ranges.sort((a,b)=>a[0]-b[0]);
+    const merged = []; for (const r of ranges){ const l = merged[merged.length-1]; if (l && r[0] <= l[1]) l[1] = Math.max(l[1], r[1]); else merged.push([...r]); }
+    const frag = document.createDocumentFragment(); let pos = 0;
+    for (const [a,b] of merged){ if (a > pos) frag.append(txt.slice(pos,a)); const m = document.createElement("mark"); m.textContent = txt.slice(a,b); frag.append(m); pos = b; }
+    if (pos < txt.length) frag.append(txt.slice(pos));
+    n.parentNode.replaceChild(frag, n);
+  }
+}
+let timer;
+function run(){
+  const raw = q.value.trim(), terms = norm(raw).split(/\s+/).filter(t => t.length > 1);
+  let total = 0;
+  for (const s of secs){
+    let n = 0;
+    const head = norm(s.querySelector("header").textContent);
+    for (const it of s.querySelectorAll(".item")){
+      it.innerHTML = it.dataset.orig;
+      if (!terms.length){ it.hidden = false; continue; }
+      const t = norm(it.textContent) + " " + head;
+      const ok = terms.every(x => t.includes(x));
+      it.hidden = !ok;
+      if (ok){ n++; highlight(it, terms); }
+    }
+    s.hidden = terms.length > 0 && n === 0;
+    total += n;
+    for (const a of document.querySelectorAll(`nav.toc a[data-id="${s.id}"]`)){
+      a.querySelector(".cnt").textContent = terms.length ? n : "";
+      a.parentElement.hidden = terms.length > 0 && n === 0;
+    }
+  }
+  status.textContent = terms.length ? (total ? `${total} rezultate pentru „${raw}”` : "") : "";
+  nores.classList.toggle("on", terms.length > 0 && total === 0);
+}
+q.addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(run, 120); });
+q.addEventListener("keydown", e => { if (e.key === "Escape"){ q.value = ""; run(); } if (e.key === "Enter"){ const f = secs.find(s => !s.hidden); if (f) f.scrollIntoView(); } });
+document.addEventListener("keydown", e => { if (e.key === "/" && document.activeElement !== q && !/input|textarea/i.test(document.activeElement.tagName)){ e.preventDefault(); q.focus(); } });
+
+const links = () => document.querySelectorAll("nav.toc a");
+const obs = new IntersectionObserver(entries => {
+  const vis = entries.filter(e => e.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+  if (!vis) return;
+  for (const a of links()) a.setAttribute("aria-current", a.dataset.id === vis.target.id ? "true" : "false");
+}, { rootMargin: "0px 0px -70% 0px" });
+secs.forEach(s => obs.observe(s));
+})();
+</script>
+
+</body>
+</html>
